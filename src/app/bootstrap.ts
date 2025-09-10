@@ -51,7 +51,7 @@ export function bootstrap() {
   const material = new THREE.SpriteNodeMaterial();
 
   //params
-  const particleCount = 14000;
+  const particleCount = 10000;
   let positionBuffer = instancedArray(particleCount, "vec2");
   let velocityBuffer = instancedArray(particleCount, "vec2");
   let typeBuffer = instancedArray(particleCount, "uint");
