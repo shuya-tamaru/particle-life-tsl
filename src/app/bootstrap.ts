@@ -288,78 +288,78 @@ export function bootstrap() {
   scene.add(mesh);
 
   // //gui
-  // const gui = new GUI();
-  // const particleFolder = gui.addFolder("ParticleParams");
-  // const colorFolder = gui.addFolder("Color");
-  // const scaleFolder = gui.addFolder("Scale");
+  const gui = new GUI();
+  const particleFolder = gui.addFolder("ParticleParams");
+  const colorFolder = gui.addFolder("Color");
+  const scaleFolder = gui.addFolder("Scale");
 
-  // particleFolder
-  //   .add(timeScale, "value")
-  //   .name("timeScale")
-  //   .min(0.01)
-  //   .max(1.0)
-  //   .step(0.01);
-  // particleFolder
-  //   .add(interactionRadiusNode, "value")
-  //   .name("interactionRadiusNode")
-  //   .min(0.01)
-  //   .max(1.0)
-  //   .step(0.01);
-  // particleFolder
-  //   .add(transitionRadiusNode, "value")
-  //   .name("transitionRadiusNode")
-  //   .min(0.01)
-  //   .max(1.0)
-  //   .step(0.01);
-  // particleFolder
-  //   .add(forceScaleNode, "value")
-  //   .name("forceScaleNode")
-  //   .min(1.0)
-  //   .max(100.0)
-  //   .step(0.01);
-  // scaleFolder
-  //   .add(scale0, "value")
-  //   .name("scale0")
-  //   .min(0.01)
-  //   .max(0.05)
-  //   .step(0.001);
-  // scaleFolder
-  //   .add(scale1, "value")
-  //   .name("scale1")
-  //   .min(0.01)
-  //   .max(0.05)
-  //   .step(0.001);
-  // scaleFolder
-  //   .add(scale2, "value")
-  //   .name("scale2")
-  //   .min(0.01)
-  //   .max(0.05)
-  //   .step(0.001);
-  // scaleFolder
-  //   .add(scale3, "value")
-  //   .name("scale3")
-  //   .min(0.01)
-  //   .max(0.05)
-  //   .step(0.001);
-  // scaleFolder
-  //   .add(scale4, "value")
-  //   .name("scale4")
-  //   .min(0.01)
-  //   .max(0.05)
-  //   .step(0.001);
-  // scaleFolder
-  //   .add(scale5, "value")
-  //   .name("scale5")
-  //   .min(0.01)
-  //   .max(0.05)
-  //   .step(0.001);
+  particleFolder
+    .add(timeScale, "value")
+    .name("timeScale")
+    .min(0.01)
+    .max(1.0)
+    .step(0.01);
+  particleFolder
+    .add(interactionRadiusNode, "value")
+    .name("interactionRadiusNode")
+    .min(0.01)
+    .max(1.0)
+    .step(0.01);
+  particleFolder
+    .add(transitionRadiusNode, "value")
+    .name("transitionRadiusNode")
+    .min(0.01)
+    .max(1.0)
+    .step(0.01);
+  particleFolder
+    .add(forceScaleNode, "value")
+    .name("forceScaleNode")
+    .min(1.0)
+    .max(100.0)
+    .step(0.01);
+  scaleFolder
+    .add(scale0, "value")
+    .name("scale0")
+    .min(0.01)
+    .max(0.05)
+    .step(0.001);
+  scaleFolder
+    .add(scale1, "value")
+    .name("scale1")
+    .min(0.01)
+    .max(0.05)
+    .step(0.001);
+  scaleFolder
+    .add(scale2, "value")
+    .name("scale2")
+    .min(0.01)
+    .max(0.05)
+    .step(0.001);
+  scaleFolder
+    .add(scale3, "value")
+    .name("scale3")
+    .min(0.01)
+    .max(0.05)
+    .step(0.001);
+  scaleFolder
+    .add(scale4, "value")
+    .name("scale4")
+    .min(0.01)
+    .max(0.05)
+    .step(0.001);
+  scaleFolder
+    .add(scale5, "value")
+    .name("scale5")
+    .min(0.01)
+    .max(0.05)
+    .step(0.001);
 
-  // colorFolder.addColor(color0, "value").name("color0");
-  // colorFolder.addColor(color1, "value").name("color1");
-  // colorFolder.addColor(color2, "value").name("color2");
-  // colorFolder.addColor(color3, "value").name("color3");
-  // colorFolder.addColor(color4, "value").name("color4");
-  // colorFolder.addColor(color5, "value").name("color5");
+  colorFolder.addColor(color0, "value").name("color0");
+  colorFolder.addColor(color1, "value").name("color1");
+  colorFolder.addColor(color2, "value").name("color2");
+  colorFolder.addColor(color3, "value").name("color3");
+  colorFolder.addColor(color4, "value").name("color4");
+  colorFolder.addColor(color5, "value").name("color5");
 
   window.addEventListener("resize", function () {
     const width = window.innerWidth;
