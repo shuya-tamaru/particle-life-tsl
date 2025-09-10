@@ -22,7 +22,7 @@ import {
   color,
   Switch,
 } from "three/tsl";
-import { GUI } from "three/addons/libs/lil-gui.module.min.js";
+import GUI from "lil-gui";
 
 export function bootstrap() {
   const width = window.innerWidth;
