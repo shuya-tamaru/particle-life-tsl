@@ -55,13 +55,8 @@ export function bootstrap() {
   let positionBuffer = instancedArray(particleCount, "vec2");
   let velocityBuffer = instancedArray(particleCount, "vec2");
   let typeBuffer = instancedArray(particleCount, "uint");
-  //colors & scale
-  // const color0 = uniform(color("#ffffff"));
-  // const color1 = uniform(color("#4cff4c"));
-  // const color2 = uniform(color("#9900ff"));
-  // const color3 = uniform(color("#0099ff"));
-  // const color4 = uniform(color("#33ccff"));
-  // const color5 = uniform(color("#ffff00"));
+
+  //colors
   const color0 = uniform(color("#00ffcc")); // ミント
   const color1 = uniform(color("#33ccff")); // スカイブルー
   const color2 = uniform(color("#9900ff")); // パープル
