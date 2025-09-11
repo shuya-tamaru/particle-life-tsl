@@ -66,12 +66,12 @@ export function bootstrap() {
   const color5 = uniform(color("#FFFFFF")); // ホワイト (ハイライト用)
 
   //scale
-  const scale0 = uniform(0.02);
-  const scale1 = uniform(0.02);
-  const scale2 = uniform(0.015);
-  const scale3 = uniform(0.015);
-  const scale4 = uniform(0.015);
-  const scale5 = uniform(0.02);
+  const scale0 = uniform(0.01);
+  const scale1 = uniform(0.01);
+  const scale2 = uniform(0.01);
+  const scale3 = uniform(0.01);
+  const scale4 = uniform(0.01);
+  const scale5 = uniform(0.01);
   //prettier-ignore
   const interactionMatrix = [
       0.2 , 0.1 , -0.1 , 0.0 , 0.03 , 0.0 ,   //0番目の粒子
