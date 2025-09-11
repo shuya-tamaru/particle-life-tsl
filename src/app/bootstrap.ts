@@ -31,14 +31,7 @@ export function bootstrap() {
 
   const scene = new THREE.Scene();
 
-  const camera = new THREE.OrthographicCamera(
-    -aspect,
-    aspect,
-    1,
-    -1,
-    0.01,
-    100
-  );
+  const camera = new THREE.OrthographicCamera(-aspect, aspect, 1, -1, 0.1, 1);
   camera.position.set(0, 0, 1);
   camera.lookAt(0, 0, 0);
 
@@ -139,7 +132,8 @@ export function bootstrap() {
       });
       const direction = pos_j.sub(pos_i);
       let normal = vec2(0.0, 0.0);
-      If(dist.greaterThan(0.000000000001), () => {
+
+      If(dist.greaterThan(float(0.000000000001)), () => {
         normal.assign(normalize(direction));
       }).Else(() => {
         normal.assign(normalize(vec2(0.1, 0.1)));
