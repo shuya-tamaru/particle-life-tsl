@@ -68,10 +68,10 @@ export function bootstrap() {
   //scale
   const scale0 = uniform(0.01);
   const scale1 = uniform(0.01);
-  const scale2 = uniform(0.01);
+  const scale2 = uniform(0.02);
   const scale3 = uniform(0.01);
-  const scale4 = uniform(0.01);
-  const scale5 = uniform(0.01);
+  const scale4 = uniform(0.02);
+  const scale5 = uniform(0.02);
   //prettier-ignore
   const interactionMatrix = [
       0.2 , 0.1 , -0.1 , 0.0 , 0.03 , 0.0 ,   //0番目の粒子
@@ -82,7 +82,7 @@ export function bootstrap() {
       0.001 , 0.001 , 0.001 , 0.001 , -0.3 , 0.0,   //5番目の粒子
   ]
   const interactionMatrixNode = uniformArray(interactionMatrix, "float");
-  const interactionRadiusNode = uniform(0.25);
+  const interactionRadiusNode = uniform(0.2);
   const transitionRadiusNode = uniform(0.3);
   const forceScaleNode = uniform(20.0);
   const timeScale = uniform(0.4);
