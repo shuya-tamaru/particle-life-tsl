@@ -73,18 +73,18 @@ export function bootstrap() {
   const scale5 = uniform(0.02);
   //prettier-ignore
   const interactionMatrix = [
-      0.2, 0.1, -0.1, 0.0, 0.03, 0.0,   //0番目の粒子
-      0.03, 0.0, -0.2, 0.2, 0.1, 0.0,   //1番目の粒子
-      0.1, 0.0, 0.0, 0.0, 0.0, -0.2,   //2番目の粒子
-      0.0, 0.2, -0.2, 0.0, 0.03, 0.0,   //3番目の粒子
-      0.03, 0.0, 0.0, 0.001, -0.001, 0.001,   //4番目の粒子
-      0.001, 0.001, 0.001, 0.001, -0.3, 0.0,   //5番目の粒子
+      0.2 , 0.1 , -0.1 , 0.0 , 0.03 , 0.0 ,   //0番目の粒子
+      0.03 , 0.0 , -0.2 , 0.2 , 0.1 , 0.0 ,   //1番目の粒子
+      0.1 , 0.0 , 0.0 , 0.0 , 0.0 , -0.2 ,   //2番目の粒子
+      0.0 , 0.2 , -0.2 , 0.0 , 0.03 , 0.0 ,   //3番目の粒子
+      0.03 , 0.0 , 0.0 , 0.001 , -0.001 , 0.001 ,   //4番目の粒子
+      0.001 , 0.001 , 0.001 , 0.001 , -0.3 , 0.0,   //5番目の粒子
   ]
   const interactionMatrixNode = uniformArray(interactionMatrix, "float");
   const interactionRadiusNode = uniform(0.25);
-  const transitionRadiusNode = uniform(0.45);
+  const transitionRadiusNode = uniform(0.3);
   const forceScaleNode = uniform(20.0);
-  const timeScale = uniform(0.5);
+  const timeScale = uniform(0.4);
 
   //createBuffers
   const init = Fn(() => {
@@ -138,7 +138,7 @@ export function bootstrap() {
       });
       const direction = pos_j.sub(pos_i);
       let normal = vec2(0.0, 0.0);
-      If(dist.greaterThan(0.001), () => {
+      If(dist.greaterThan(0.000000000001), () => {
         normal.assign(normalize(direction));
       }).Else(() => {
         normal.assign(normalize(vec2(0.1, 0.1)));
