@@ -21,6 +21,9 @@ import {
   smoothstep,
   color,
   Switch,
+  time,
+  sin,
+  cos,
 } from "three/tsl";
 import GUI from "lil-gui";
 
@@ -44,6 +47,7 @@ export function bootstrap() {
 
   const renderer = new THREE.WebGPURenderer();
   renderer.setSize(width, height);
+  renderer.setClearColor(new THREE.Color("#000"));
   document.body.appendChild(renderer.domElement);
   renderer.setAnimationLoop(animate);
 
@@ -57,12 +61,12 @@ export function bootstrap() {
   let typeBuffer = instancedArray(particleCount, "uint");
 
   //colors
-  const color0 = uniform(color("#00ffcc")); // ミント
-  const color1 = uniform(color("#33ccff")); // スカイブルー
-  const color2 = uniform(color("#9900ff")); // パープル
-  const color3 = uniform(color("#ff66ff")); // マゼンタ
-  const color4 = uniform(color("#ffff66")); // レモン
-  const color5 = uniform(color("#ffffff")); // ホワイト
+  const color0 = uniform(color("#9933FF")); // アメジストパープル (深みのある紫)
+  const color1 = uniform(color("#00CCFF")); // エレクトリックブルー
+  const color2 = uniform(color("#FF33CC")); // ホットピンク
+  const color3 = uniform(color("#FFD700")); // ゴールド (光沢感)
+  const color4 = uniform(color("#00FF66")); // エメラルドグリーン
+  const color5 = uniform(color("#FFFFFF")); // ホワイト (ハイライト用)
 
   //scale
   const scale0 = uniform(0.02);
