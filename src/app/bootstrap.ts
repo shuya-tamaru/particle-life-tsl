@@ -21,9 +21,6 @@ import {
   smoothstep,
   color,
   Switch,
-  time,
-  sin,
-  cos,
 } from "three/tsl";
 import GUI from "lil-gui";
 
