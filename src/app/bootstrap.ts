@@ -15,7 +15,6 @@ import {
   Loop,
   uniformArray,
   abs,
-  pow,
   normalize,
   vec2,
   smoothstep,
