@@ -33,13 +33,11 @@ export function bootstrap() {
 
   const camera = new THREE.OrthographicCamera(-aspect, aspect, 1, -1, 0.1, 1);
   camera.position.set(0, 0, 1);
-  camera.lookAt(0, 0, 0);
 
   const renderer = new THREE.WebGPURenderer();
   renderer.setSize(width, height);
   renderer.setClearColor(new THREE.Color("#000"));
   document.body.appendChild(renderer.domElement);
-  renderer.setAnimationLoop(animate);
 
   const geometry = new THREE.PlaneGeometry(1, 1);
   const material = new THREE.SpriteNodeMaterial();
@@ -49,6 +47,7 @@ export function bootstrap() {
   let positionBuffer = instancedArray(particleCount, "vec2");
   let velocityBuffer = instancedArray(particleCount, "vec2");
   let typeBuffer = instancedArray(particleCount, "uint");
+  const typeCount = 6;
 
   //colors
   const color0 = uniform(color("#9933FF")); // アメジストパープル (深みのある紫)
@@ -94,8 +93,9 @@ export function bootstrap() {
         .sub(0.5)
         .mul(2.0)
     );
+
     const initialVelocity = vec2(0.0, 0.0);
-    const rnd = hash(instanceIndex).mul(6.0).floor().toUint();
+    const rnd = hash(instanceIndex).mul(typeCount).floor().toUint();
 
     pos.assign(initialPosition);
     vel.assign(initialVelocity);
@@ -103,31 +103,29 @@ export function bootstrap() {
   });
 
   const initCompute = init().compute(particleCount);
-  renderer.computeAsync(initCompute);
+  renderer.compute(initCompute);
 
   //compute
   const update = Fn(() => {
-    const delta = float(1 / 60)
-      .mul(timeScale)
-      .toVar();
+    const delta = float(1 / 60).mul(timeScale);
 
     const pos_i = positionBuffer.element(instanceIndex);
     const vel_i = velocityBuffer.element(instanceIndex);
     const type_i = typeBuffer.element(instanceIndex);
     const force_i = vec2(0);
-    const typeCount = 6;
 
-    let indexNode = uint(0);
+    let j = uint(0);
     Loop(particleCount, () => {
-      If(indexNode.equal(instanceIndex), () => {
-        indexNode.assign(indexNode.add(uint(1)));
+      If(j.equal(instanceIndex), () => {
+        j.assign(j.add(uint(1)));
         return;
       });
-      const pos_j = positionBuffer.element(indexNode);
-      const type_j = typeBuffer.element(indexNode);
+
+      const pos_j = positionBuffer.element(j);
+      const type_j = typeBuffer.element(j);
       const dist = pos_j.sub(pos_i).length();
       If(dist.greaterThan(interactionRadiusNode), () => {
-        indexNode.assign(indexNode.add(uint(1)));
+        j.assign(j.add(uint(1)));
         return;
       });
       const direction = pos_j.sub(pos_i);
@@ -136,7 +134,7 @@ export function bootstrap() {
       If(dist.greaterThan(float(0.000000000001)), () => {
         normal.assign(normalize(direction));
       }).Else(() => {
-        normal.assign(normalize(vec2(0.1, 0.1)));
+        normal.assign(normalize(vec2(1.0, 1.0)));
       });
       const idx = type_i.mul(uint(typeCount)).add(type_j);
       const k = interactionMatrixNode.element(idx);
@@ -158,10 +156,10 @@ export function bootstrap() {
         });
 
       force_i.assign(force_i.add(normal.mul(w).mul(forceScaleNode)));
-      indexNode.assign(indexNode.add(uint(1)));
+      j.assign(j.add(uint(1)));
     });
 
-    const frictionFactor = pow(float(0.5), delta.div(delta.mul(2.0)));
+    const frictionFactor = 0.7;
 
     let new_vel = vel_i.add(force_i.mul(delta));
     new_vel.assign(new_vel.mul(frictionFactor));
@@ -357,18 +355,18 @@ export function bootstrap() {
   colorFolder.addColor(color5, "value").name("color5");
 
   window.addEventListener("resize", function () {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    const aspect = width / height;
+    const aspect = window.innerWidth / window.innerHeight;
 
     camera.left = -aspect;
     camera.right = aspect;
     camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
+    renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
   function animate() {
     renderer.computeAsync(updateCompute);
     renderer.render(scene, camera);
   }
+
+  renderer.setAnimationLoop(animate);
 }
