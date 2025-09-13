@@ -24,9 +24,13 @@ import {
 import GUI from "lil-gui";
 
 export function bootstrap() {
-  const width = Math.max(window.innerWidth, 1);
-  const height = Math.max(window.innerHeight, 1);
-  const aspect = width / height;
+  // デフォルトは16:9のアスペクト比を基準にする
+  const defaultWidth = 1920;
+  const defaultHeight = 1080;
+
+  let width = Math.max(window.innerWidth, defaultWidth);
+  let height = Math.max(window.innerHeight, defaultHeight);
+  let aspect = width / height;
 
   const scene = new THREE.Scene();
 
@@ -354,12 +358,14 @@ export function bootstrap() {
   colorFolder.addColor(color5, "value").name("color5");
 
   window.addEventListener("resize", function () {
-    const aspect = window.innerWidth / window.innerHeight;
+    width = window.innerWidth;
+    height = window.innerHeight;
+    aspect = width / height;
 
     camera.left = -aspect;
     camera.right = aspect;
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(width, height);
   });
 
   function animate() {
