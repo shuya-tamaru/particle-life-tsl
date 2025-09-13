@@ -24,13 +24,9 @@ import {
 import GUI from "lil-gui";
 
 export function bootstrap() {
-  // デフォルトは16:9のアスペクト比を基準にする
-  const defaultWidth = 1920;
-  const defaultHeight = 1080;
-
-  let width = Math.max(window.innerWidth, defaultWidth);
-  let height = Math.max(window.innerHeight, defaultHeight);
-  let aspect = width / height;
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+  let aspect = height ? width / height : 16 / 9;
 
   const scene = new THREE.Scene();
 
