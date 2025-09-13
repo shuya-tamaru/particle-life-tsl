@@ -144,11 +144,10 @@ export function bootstrap() {
         w.assign(r.div(beta).sub(1.0));
       })
         .ElseIf(r.lessThan(1.0), () => {
-          const oneminusbeta = float(1.0).sub(beta);
-          const absolute = abs(float(2.0).mul(r).sub(1.0).sub(beta)).div(
-            oneminusbeta
-          );
-          w.assign(k.mul(float(1.0).sub(absolute)));
+          const range = float(1.0).sub(beta); // 区間の幅 (1 - β)
+          const center = float(1.0).add(beta).mul(0.5); // 山の中心 (1+β)/2
+          const distance = abs(r.sub(center)).mul(2.0).div(range); // 中心からの距離を正規化
+          w.assign(k.mul(float(1.0).sub(distance)));
         })
         .Else(() => {
           w.assign(float(0.0));
@@ -363,9 +362,11 @@ export function bootstrap() {
   });
 
   function animate() {
+    requestAnimationFrame(animate);
     renderer.computeAsync(updateCompute);
     renderer.render(scene, camera);
   }
+  animate();
 
-  renderer.setAnimationLoop(animate);
+  // renderer.setAnimationLoop(animate);
 }
