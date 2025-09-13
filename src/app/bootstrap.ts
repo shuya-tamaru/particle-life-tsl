@@ -164,11 +164,11 @@ export function bootstrap() {
     new_vel.assign(new_vel.mul(frictionFactor));
 
     const new_pos = pos_i.add(new_vel.mul(delta));
-    If(new_pos.x.greaterThan(float(1.2 * aspect)), () => {
-      new_pos.assign(vec2(-1.2 * aspect, new_pos.y));
+    If(new_pos.x.greaterThan(float(1.2).mul(aspect)), () => {
+      new_pos.assign(vec2(float(-1.2).mul(aspect), new_pos.y));
     })
-      .ElseIf(new_pos.x.lessThan(float(-1.2 * aspect)), () => {
-        new_pos.assign(vec2(1.2 * aspect, new_pos.y));
+      .ElseIf(new_pos.x.lessThan(float(-1.2).mul(aspect)), () => {
+        new_pos.assign(vec2(float(1.2).mul(aspect), new_pos.y));
       })
       .ElseIf(new_pos.y.greaterThan(float(1.2)), () => {
         new_pos.assign(vec2(new_pos.x, -1.2));
