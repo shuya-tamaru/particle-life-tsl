@@ -24,8 +24,8 @@ import {
 import GUI from "lil-gui";
 
 export function bootstrap() {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
+  const width = Math.max(window.innerWidth, 1);
+  const height = Math.max(window.innerHeight, 1);
   const aspect = width / height;
 
   const scene = new THREE.Scene();
@@ -88,7 +88,7 @@ export function bootstrap() {
       hash(instanceIndex.add(uint(Math.random() * 0xffffff)))
         .sub(0.5)
         .mul(2.0)
-        .mul(aspect),
+        .mul(float(aspect)),
       hash(instanceIndex.add(uint(Math.random() * 0xffffff)))
         .sub(0.5)
         .mul(2.0)
@@ -164,11 +164,11 @@ export function bootstrap() {
     new_vel.assign(new_vel.mul(frictionFactor));
 
     const new_pos = pos_i.add(new_vel.mul(delta));
-    If(new_pos.x.greaterThan(float(1.2).mul(aspect)), () => {
-      new_pos.assign(vec2(float(-1.2).mul(aspect), new_pos.y));
+    If(new_pos.x.greaterThan(float(1.2).mul(float(aspect))), () => {
+      new_pos.assign(vec2(float(-1.2).mul(float(aspect)), new_pos.y));
     })
-      .ElseIf(new_pos.x.lessThan(float(-1.2).mul(aspect)), () => {
-        new_pos.assign(vec2(float(1.2).mul(aspect), new_pos.y));
+      .ElseIf(new_pos.x.lessThan(float(-1.2).mul(float(aspect))), () => {
+        new_pos.assign(vec2(float(1.2).mul(float(aspect)), new_pos.y));
       })
       .ElseIf(new_pos.y.greaterThan(float(1.2)), () => {
         new_pos.assign(vec2(new_pos.x, -1.2));
