@@ -87,7 +87,8 @@ export function bootstrap() {
     const initialPosition = vec2(
       hash(instanceIndex.add(uint(Math.random() * 0xffffff)))
         .sub(0.5)
-        .mul(2.0 * aspect),
+        .mul(2.0)
+        .mul(aspect),
       hash(instanceIndex.add(uint(Math.random() * 0xffffff)))
         .sub(0.5)
         .mul(2.0)
