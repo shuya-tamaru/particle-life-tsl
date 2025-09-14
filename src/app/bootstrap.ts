@@ -27,7 +27,6 @@ export function bootstrap(count: number, defaultAspect: number) {
   let width = window.innerWidth;
   let height = window.innerHeight;
   let aspect = height ? width / height : defaultAspect;
-  aspect = 1.0;
 
   const scene = new THREE.Scene();
 
