@@ -22,6 +22,7 @@ import {
   Switch,
 } from "three/tsl";
 import GUI from "lil-gui";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 export function bootstrap(count: number, defaultAspect: number) {
   let width = window.innerWidth;
@@ -30,13 +31,21 @@ export function bootstrap(count: number, defaultAspect: number) {
 
   const scene = new THREE.Scene();
 
-  const camera = new THREE.OrthographicCamera(-aspect, aspect, 1, -1, 0.1, 1);
+  const camera = new THREE.OrthographicCamera(-aspect, aspect, 1, -1, 0.1, 100);
   camera.position.set(0, 0, 1);
 
   const renderer = new THREE.WebGPURenderer();
   renderer.setSize(width, height);
   renderer.setClearColor(new THREE.Color("#000"));
   document.body.appendChild(renderer.domElement);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.minDistance = 0.1;
+  controls.maxDistance = 50;
+  controls.enableRotate = false; // 回転禁止
+  controls.enablePan = false; // 平行移動禁止
+  controls.enableZoom = true;
 
   const geometry = new THREE.PlaneGeometry(1, 1);
   const material = new THREE.SpriteNodeMaterial();
@@ -367,6 +376,7 @@ export function bootstrap(count: number, defaultAspect: number) {
   function animate() {
     requestAnimationFrame(animate);
     renderer.computeAsync(updateCompute);
+    controls.update();
     renderer.render(scene, camera);
   }
   animate();
