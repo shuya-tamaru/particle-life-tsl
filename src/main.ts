@@ -3,7 +3,7 @@ import { bootstrap } from "./app/bootstrap";
 
 window.addEventListener("load", () => {
   const deviceType = getDeviceType();
-  const count = deviceType === "mobile" ? 2000 : 10000;
+  const count = deviceType === "mobile" ? 5000 : 10000;
   const defaultAspect = deviceType === "mobile" ? 9 / 16 : 16 / 9;
 
   bootstrap(count, defaultAspect);
