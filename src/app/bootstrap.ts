@@ -23,10 +23,10 @@ import {
 } from "three/tsl";
 import GUI from "lil-gui";
 
-export function bootstrap() {
+export function bootstrap(count: number, defaultAspect: number) {
   let width = window.innerWidth;
   let height = window.innerHeight;
-  let aspect = height ? width / height : 16 / 9;
+  let aspect = height ? width / height : defaultAspect;
 
   const scene = new THREE.Scene();
 
@@ -42,7 +42,7 @@ export function bootstrap() {
   const material = new THREE.SpriteNodeMaterial();
 
   //params
-  const particleCount = 10000;
+  const particleCount = count;
   let positionBuffer = instancedArray(particleCount, "vec2");
   let velocityBuffer = instancedArray(particleCount, "vec2");
   let typeBuffer = instancedArray(particleCount, "uint");
